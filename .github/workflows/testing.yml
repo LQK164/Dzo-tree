@@ -11,6 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run your script
+      - name: Install HTMLHint
         run: |
-          echo "This is a daily task running!"
+          npm install -g htmlhint
+
+      - name: Validate HTML
+        run: htmlhint index.html
