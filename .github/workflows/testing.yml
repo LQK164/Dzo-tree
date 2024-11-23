@@ -1,26 +1,25 @@
-name: Validate HTML
+name: Deploy to GitHub Pages
 
 on:
   schedule:
     - cron: '0 0 * * *'  # Chạy lúc 00:00 UTC mỗi ngày
   push:
     branches:
-      - main  # Change if your default branch is different
-  pull_request:
-    branches:
-      - main
+      - main  # Thay đổi nếu nhánh chính của bạn là nhánh khác
 
 jobs:
-  validate-html:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install HTMLHint
-        run: |
-          npm install -g htmlhint
+      - name: Build HTML
+        run: echo "Building HTML..."  # Thay thế nếu có bước build cụ thể
 
-      - name: Validate HTML
-        run: htmlhint index.html
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.TOKEN_HTML }}
+          publish_dir: .  # Thư mục chứa các file cần triển khai (ở đây là root)
