@@ -1,15 +1,22 @@
-name: Daily Workflow
+name: Validate HTML
 
 on:
   schedule:
     - cron: '0 0 * * *'  # Chạy lúc 00:00 UTC mỗi ngày
+  push:
+    branches:
+      - main  # Change if your default branch is different
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  run-daily-task:
+  validate-html:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Install HTMLHint
         run: |
